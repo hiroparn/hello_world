@@ -1,0 +1,147 @@
+下記がソースコードです。
+------
+＊＊＊:~/environment $ cd rails_projects/
+＊＊＊:~/environment/rails_projects $ cd qanda/
+＊＊＊:~/environment/rails_projects/qanda (master) $ heroku buildpacks:set https://github.com/bundler/heroku-buildpack-bundler2
+ ›   Error: The buildpack https://github.com/bundler/heroku-buildpack-bundler2 is already set on your app.
+＊＊＊:~/environment/rails_projects/qanda (master) $ heroku buildpacks:set https://github.com/bundler/heroku-buildpack-bundler2
+ ›   Error: The buildpack https://github.com/bundler/heroku-buildpack-bundler2 is already set on your app.
+＊＊＊:~/environment/rails_projects/qanda (master) $ git push heroku master
+Counting objects: 116, done.
+Compressing objects: 100% (101/101), done.
+Writing objects: 100% (116/116), 26.94 KiB | 1021.00 KiB/s, done.
+Total 116 (delta 8), reused 0 (delta 0)
+remote: Compressing source files... done.
+remote: Building source:
+remote: 
+remote: -----> Ruby app detected
+remote: -----> Compiling Ruby/Rails
+remote: 
+remote: ###### WARNING:
+remote: 
+remote:        This buildpack was created as a stop-gap measure to allow running applications with Bundler 2 on Heroku.
+remote:        Heroku now supports Bundler 2 directly: https://devcenter.heroku.com/changelog-items/1563
+remote:        
+remote:        Please discontinue use of this buildpack and instead directly use the `heroku/ruby` buildpack.
+remote:        
+remote:        To remove this buildpack use the `heroku buildpacks` command to list your existing buildpacks.
+remote:        
+remote:        If you only have one buildpack listed you can run:
+remote:        
+remote:        ```
+remote:        heroku buildpacks:set heroku/ruby
+remote:        ```
+remote:        
+remote:        If you have multiple buildpacks, you'll need to add the buildpack to the correct location using
+remote:        `heroku buildpacks:add heroku/ruby -i <correct index>` and then remove this buildpack via:
+remote:        
+remote:        ```
+remote:        heroku buildpacks:remove https://github.com/bundler/heroku-buildpack-bundler2
+remote:        ```
+remote: 
+remote: -----> Using Ruby version: ruby-2.5.1
+remote: -----> Installing dependencies using bundler 2.0.1
+remote:        Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin -j4 --deployment
+remote:        /tmp/build_4f7d048c717ee214d2fefcd562bb4f78/vendor/ruby-2.5.1/lib/ruby/2.5.0/rubygems.rb:284:in `find_spec_for_exe': Could not find 'bundler' (1.17.3) required by your /tmp/build_4f7d048c717ee214d2fefcd562bb4f78/Gemfile.lock. (Gem::GemNotFoundException)
+remote:        To update to the latest version installed on your system, run `bundle update --bundler`.
+remote:        To install the missing version, run `gem install bundler:1.17.3`
+remote:         from /tmp/build_4f7d048c717ee214d2fefcd562bb4f78/vendor/ruby-2.5.1/lib/ruby/2.5.0/rubygems.rb:303:in `activate_bin_path'
+remote:         from vendor/bundle/ruby/2.5.0/bin/bundle:23:in `<main>'
+remote:        Bundler Output: /tmp/build_4f7d048c717ee214d2fefcd562bb4f78/vendor/ruby-2.5.1/lib/ruby/2.5.0/rubygems.rb:284:in `find_spec_for_exe': Could not find 'bundler' (1.17.3) required by your /tmp/build_4f7d048c717ee214d2fefcd562bb4f78/Gemfile.lock. (Gem::GemNotFoundException)
+remote:        To update to the latest version installed on your system, run `bundle update --bundler`.
+remote:        To install the missing version, run `gem install bundler:1.17.3`
+remote:         from /tmp/build_4f7d048c717ee214d2fefcd562bb4f78/vendor/ruby-2.5.1/lib/ruby/2.5.0/rubygems.rb:303:in `activate_bin_path'
+remote:         from vendor/bundle/ruby/2.5.0/bin/bundle:23:in `<main>'
+remote: 
+remote:  !
+remote:  !     Failed to install gems via Bundler.
+remote:  !
+remote:  !     Push rejected, failed to compile Ruby app.
+remote: 
+remote:  !     Push failed
+remote: Verifying deploy...
+remote: 
+remote: !       Push rejected to qanda-67890.
+remote: 
+To https://git.heroku.com/qanda-67890.git
+ ! [remote rejected] master -> master (pre-receive hook declined)
+error: failed to push some refs to 'https://git.heroku.com/qanda-67890.git'
+＊＊＊:~/environment/rails_projects/qanda (master) $ 
+--------
+下記がGEMファイルです。
+--------
+source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby '2.5.1'
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 5.2.1'
+# Use sqlite3 as the database for Active Record
+# 5/4 add
+
+# Use Puma as the app server
+gem 'puma', '~> 3.11'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5.0'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+# See https://github.com/rails/execjs#readme for more supported runtimes
+# gem 'mini_racer', platforms: :ruby
+
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails', '~> 4.2'
+# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
+gem 'turbolinks', '~> 5'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.5'
+# Use Redis adapter to run Action Cable in production
+# gem 'redis', '~> 4.0'
+# Use ActiveModel has_secure_password
+# gem 'bcrypt', '~> 3.1.7'
+
+# Use ActiveStorage variant
+# gem 'mini_magick', '~> 4.8'
+
+# Use Capistrano for deployment
+# gem 'capistrano-rails', group: :development
+
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'sqlite3','~> 1.3.6'
+end
+
+group :development do
+  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '>= 2.15'
+  gem 'selenium-webdriver'
+  # Easy installation and use of chromedriver to run system tests with Chrome
+  gem 'chromedriver-helper'
+end
+
+group :production do
+  gem 'pg', '~> 0.18.4'
+end
+
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+#5/4 add
+gem 'bootstrap', '~> 4.1.1'
+gem 'jquery-rails', '~> 4.3.1'
+-------
+以上、よろしくお願いします。
